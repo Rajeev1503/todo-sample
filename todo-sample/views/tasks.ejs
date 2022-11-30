@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./head', {title: "Todo App"}); -%>
+  <body>
+    <div class="container">
+      <div class="create-task-container">
+        <h1>Create New Task</h1>
+        <form method="POST" action="/api/createtask" class="inputform">
+          <input
+            type="text"
+            name="taskName"
+            placeholder="Task name"
+            autocomplete="off"
+          />
+          <textarea
+            name="description"
+            placeholder="Description"
+            autocomplete="off"
+            rows="4"
+          ></textarea>
+          <br />
+
+          <br />
+          <button class="submit">Submit</button>
+        </form>
+      </div>
+
+      <div class="tasklist">
+        <ul>
+          <% for(let task of allTasks) { %>
+          <div class="tasksview">
+            <a href="/api/createtasklist/<%= task._id %>">
+              <li>
+                <ul>
+                  <li>Name: <%= task.taskName %></li>
+                  <li>Description: <%= task.description %></li>
+                  <% if (task.isActive) { %>
+                  <p style="color: green">Active</p>
+                  <%} else { %>
+                  <p style="color: red">Active</p>
+                  <% } %>
+                </ul>
+              </li>
+            </a>
+            <br />
+            <div class="taskbuttonsdiv">
+              <button class="task-btn">
+                <a href="/api/createtasklist/<%= task._id %>/edit">Edit</a>
+              </button>
+
+              <form
+                class="task-btn"
+                action="/api/createtasklist/<%=task._id%>?_method=DELETE"
+                method="POST"
+              >
+                <button class="delete-btn">Delete</button>
+              </form>
+            </div>
+          </div>
+          <% }%>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./head', {title: "Todo App"}); -%>
+  <body>
+    <div class="container">
+      <div class="create-task-container tasklist-container">
+        <div class="edit-task-list">
+          <h1><%=getTaskList.taskListName%></h1>
+          <form
+            action="/api/createtasklist/<%=getTaskList._id%>?_method=PUT"
+            method="POST"
+            class="inputform"
+          >
+            <input
+              type="text"
+              name="taskListName"
+              placeholder="Task name"
+              autocomplete="off"
+              value="<%= getTaskList.taskListName %>"
+            />
+            <textarea
+              name="description"
+              placeholder="Description"
+              autocomplete="off"
+            ><%= getTaskList.description%></textarea
+            >
+            <br />
+            <button class="submit">Update</button>
+          </form>
+        </div>
+        <br />
+        <br />
+        <div class="add-new-task">
+          <form method="POST" action="/api/createtask" class="inputform">
+            <h2>Add Task</h2>
+
+            <label for="tasksname" class="type-text-label">Task Name:</label>
+            <input
+              type="text"
+              name="taskName"
+              placeholder="Task name"
+              autocomplete="off"
+            /><br />
+            <label for="description">Description:</label
+            ><textarea
+              name="description"
+              placeholder="Description"
+              autocomplete="off"
+            ></textarea
+            ><br />
+            <label for="duedate">Due Date:</label
+            ><input
+              type="date"
+              name="dueDate"
+              placeholder="Due Date"
+              class="due-date"
+            /><br />
+            <label for="periodtype">Period Type:</label
+            ><select name="periodType" id="periodtype" form="periodtype">
+              <option value="Weekly">Weekly</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Quaterly">Quaterly</option>
+              <option value="Yearly">Yearly</option></select
+            ><br />
+
+            <button class="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
